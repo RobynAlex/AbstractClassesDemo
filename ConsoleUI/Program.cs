@@ -8,6 +8,12 @@ namespace ConsoleUI
 {
     class Program
     {
+        public static string Year { get; private set; }
+        public static string Make { get; private set; }
+        public static string Model { get; private set; }
+        public static bool HasSideCart { get; private set; }
+        public static bool HasTrunk { get; private set; }
+
         static void Main(string[] args)
         {
             /*
@@ -33,16 +39,45 @@ namespace ConsoleUI
 
             // Create a list of Vehicle called vehicles
 
+            List<Vehicle> vehicles = new List<Vehicle>();
+
             /*
              * Create 4 instances: 1 Car, 1 Motorcycle, and then 2 instances of type Vehicle (use explicit typing) but use constuctors from derived classes
              * - new it up as one of each derived class
              * Set the properties with object initializer syntax
              */
+            Vehicle car1 = new Car();
+            { Year = "2018"; Make = "Nissan"; Model = "Rogue"; HasTrunk = true; };
+          
+            Motorcycle moto1 = new Motorcycle();
+            { Year = "2014"; Make = "Kawasaki"; Model = "Z900"; HasSideCart = true; };
+
+            Vehicle car2 = new Car();
+            { Year = "2019"; Make = "Tesla"; Model = "Model 3"; HasTrunk = false; };
+
+            Motorcycle moto2 = new Motorcycle();
+            { Year = "2012"; Make = "Harley"; Model = "Davidson"; HasSideCart = false; };
 
             /*
              * Add the 4 vehicles to the list
              * Using a foreach loop iterate over each of the properties
              */
+
+            vehicles.Add(car1);
+            vehicles.Add(car2);
+            vehicles.Add(moto1);
+            vehicles.Add(moto2);
+
+            foreach(var item in vehicles)
+            {
+                Console.WriteLine($"{item.Year} {item.Make} {item.Model}");
+                Console.WriteLine();
+                item.DriveAbstract();
+                Console.WriteLine();
+                item.DriveVirtual();
+                Console.WriteLine();
+            }
+
 
             // Call each of the drive methods for one car and one motorcycle
 
